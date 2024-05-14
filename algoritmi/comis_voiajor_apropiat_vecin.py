@@ -1,11 +1,5 @@
-import numpy as np
-
-def generate_random_distances(n_cities):
-    distances = np.random.randint(1, 100, size=(n_cities, n_cities))
-    np.fill_diagonal(distances, 0)
-    return distances.tolist()
-def nearest_neighbor(distances, start_city=0):
-    visited = set([start_city])
+def comis_voiajor_nearest_neighbor(distances, start_city=0):
+    visited = {start_city}
     path = [start_city]
 
     while len(visited) < len(distances):

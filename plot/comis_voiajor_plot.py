@@ -71,9 +71,6 @@ def plot_tsp_results(n_cities, num_trials=10):
     plt.title(f'Average Total Distance for {num_trials} Trials')
     plt.show()
 
-# Example usage
-if __name__ == "__main__":
-    plot_tsp_results(5)
 def plot_tsp_results_option():
     n_cities = int(input("Enter the number of cities: "))
     plot_tsp_results(n_cities, num_trials=10)

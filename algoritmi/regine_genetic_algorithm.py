@@ -1,10 +1,15 @@
 import random
 
-from functii.utils import generate_board_state, POPULATION_SIZE, MAX_GENERATIONS, calculate_fitness, \
-    tournament_selection, crossover, MUTATION_RATE, mutate, count_attacks, generate_board
+from functii.utils import tournament_selection, \
+    count_attacks, generate_board
+
+POPULATION_SIZE = 50
+MUTATION_RATE = 0.1
+MAX_GENERATIONS = 100
 
 
-def regine_genetic_algorithm(n):
+def regine_genetic_algorithm(board):
+    n = len(board)
     population = [(generate_board(n), 0) for _ in range(POPULATION_SIZE)]
     for generation in range(MAX_GENERATIONS):
         population = [(board_state, count_attacks(board_state)) for board_state, _ in population]
@@ -24,3 +29,15 @@ def regine_genetic_algorithm(n):
         population = new_population
     print("No solution found after", MAX_GENERATIONS, "generations.")
     return None  # Return None if no solution is found
+
+
+def crossover(parent1, parent2, n):
+    crossover_point = random.randint(1, n - 1)
+    child = parent1[:crossover_point] + parent2[crossover_point:]
+    return child
+
+
+def mutate(board_state, n):
+    pos1, pos2 = random.sample(range(n), 2)
+    board_state[pos1], board_state[pos2] = board_state[pos2], board_state[pos1]
+    return board_state

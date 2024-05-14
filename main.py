@@ -1,5 +1,6 @@
 import os
 
+from functii.comis_voiagor_plot_option import show_comis_voiajor_regine_plot
 from functii.comis_voiajor_apropiat_vecin_option import show_tsp_nearest_neighbor_option
 from functii.comis_voiajor_bkt_rec_option import show_tsp_recursive_backtracking_option
 from functii.info_option import show_info
@@ -9,8 +10,6 @@ from functii.regine_aplinist_option import show_regine_aplinist_option
 from functii.regine_backtracking_option import show_regine_backtracking_option
 from functii.regine_genetic_algorithm_option import show_genetic_algorithm_option
 from functii.regine_simulated_annealing_option import show_simulated_annealing_option
-from functii.utils import print_board, generate_board
-from plot.comis_voiajor_plot import plot_tsp_results, plot_tsp_results_option
 
 main_menu_text = f"""\
 a. Problema celor N regine (backtracking recursiv)
@@ -28,16 +27,16 @@ Input option:
 >>> """
 
 option_to_func = {
-    "y": exit,
-    "x": show_info,
-    "h": plot_tsp_results,
-    "g":show_tsp_nearest_neighbor_option,
-    "f": show_tsp_recursive_backtracking_option,
-    "e": show_n_regine_plot,
-    "d": show_genetic_algorithm_option,
-    "c": show_simulated_annealing_option,
-    "b": show_regine_aplinist_option,
     "a": show_regine_backtracking_option,
+    "b": show_regine_aplinist_option,
+    "c": show_simulated_annealing_option,
+    "d": show_genetic_algorithm_option,
+    "e": show_n_regine_plot,
+    "f": show_tsp_recursive_backtracking_option,
+    "g": show_tsp_nearest_neighbor_option,
+    "h": show_comis_voiajor_regine_plot,
+    "x": show_info,
+    "y": exit,
 }
 
 
@@ -52,5 +51,5 @@ def main_menu():
 
 
 if __name__ == '__main__':
-    generate_board(15)
+    # generate_board(15)
     main_menu()
