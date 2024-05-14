@@ -9,7 +9,7 @@ def show_genetic_algorithm_option() -> None:
     for path in problem_file_paths:
         board = read_board(path)
         start_time = time.time()
-        solution = regine_genetic_algorithm(len(board))
+        solution = regine_genetic_algorithm(board)
         end_time = time.time()
         print(f"Genetic Algorithm Solution found in {end_time - start_time:.2f} seconds.")
         print(f"Initial board:\n")
