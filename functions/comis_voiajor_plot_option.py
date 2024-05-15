@@ -7,7 +7,7 @@ from algorithms.comis_voiajor_apropiat_vecin import comis_voiajor_nearest_neighb
 from algorithms.comis_voiajor_backtracking_recursiv import comis_voiajor_recursive_backtracking
 from functions.utils import generate_random_distances
 
-ROAD_SIZES = (30, 60, 100, 150, 200, 500)
+ROAD_SIZES = (5, 7, 8, 9, 10, 11)
 ALGORITHMS: dict[str, Callable] = {
     'Metoda alg. celui mai apropiat vecin': comis_voiajor_recursive_backtracking,
     'Metoda backtracking recursiv': comis_voiajor_nearest_neighbor,

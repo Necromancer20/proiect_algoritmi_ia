@@ -1,4 +1,4 @@
-import time
+import time, random
 
 from algorithms.comis_voiajor_backtracking_recursiv import comis_voiajor_recursive_backtracking
 from functions.utils import generate_random_distances
@@ -7,16 +7,19 @@ from functions.utils import generate_random_distances
 def show_tsp_recursive_backtracking_option():
     n_cities = 5  # Number of cities
     distances = generate_random_distances(n_cities)
+
+    start_city = random.randint(0, n_cities-1)
+
     start_time = time.time()
-    result = comis_voiajor_recursive_backtracking(distances)
+    min_cost, optimal_path = comis_voiajor_recursive_backtracking(distances, start_city)
     end_time = time.time()
     print(f"Solution found in {end_time - start_time:.2f} seconds.")
 
-    if result is not None:
+    if min_cost is not None:
         print(f"Initial distances:\n")
         for row in distances:
             print(' '.join(map(str, row)))
-        print(f"Solved path:\n")
-        print(result)
+        print(f"Minimum cost for TSP starting from city {start_city}: {min_cost}")
+        print("Optimal Path:", optimal_path)
     else:
         print("No solution found.")

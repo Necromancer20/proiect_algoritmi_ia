@@ -118,6 +118,11 @@ def print_path(path):
 
 def generate_random_distances(n_cities):
     # Generate a square matrix of random distances
-    distances = np.random.randint(1, 100, size=(n_cities, n_cities))
-    np.fill_diagonal(distances, 0)  # Diagonal elements represent the distance from a city to itself, which is 0
-    return distances.tolist()
+    distances = [[0] * n_cities for _ in range(n_cities)]
+
+    for i in range(n_cities):
+        for j in range(i+1, n_cities):
+            distances[i][j] = distances[j][i] = random.randint(1, 100)
+
+    #np.fill_diagonal(distances, 0)  # Diagonal elements represent the distance from a city to itself, which is 0
+    return distances#.tolist()
