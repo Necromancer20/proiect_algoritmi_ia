@@ -3,11 +3,11 @@ from typing import Callable
 
 import matplotlib.pyplot as plt
 
-from algoritmi.regine_alpinist import solve_regine_alpinist
-from algoritmi.regine_backtracking import regine_backtracking
-from algoritmi.regine_genetic_algorithm import regine_genetic_algorithm
-from algoritmi.regine_simulated_annealing import regine_simulated_annealing
-from functii.utils import generate_board
+from algorithms.regine_alpinist import solve_regine_alpinist
+from algorithms.regine_backtracking import regine_backtracking
+from algorithms.regine_genetic_algorithm import regine_genetic_algorithm
+from algorithms.regine_simulated_annealing import regine_simulated_annealing
+from functions.utils import generate_board
 
 TABLE_SIZES = (3, 5, 10, 12, 13, 15, 20)
 ALGORITHMS: dict[str, Callable] = {

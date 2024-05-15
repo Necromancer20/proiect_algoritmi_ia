@@ -1,9 +1,9 @@
 
 import time
 
-from algoritmi.regine_simulated_annealing import regine_simulated_annealing
+from algorithms.regine_simulated_annealing import regine_simulated_annealing
 from constants import problem_file_paths
-from functii.utils import read_board, print_board
+from functions.utils import read_board, print_board
 def show_simulated_annealing_option():
     for path in problem_file_paths:
         board = read_board(path)

@@ -3,9 +3,9 @@ from typing import Callable
 
 import matplotlib.pyplot as plt
 
-from algoritmi.comis_voiajor_apropiat_vecin import comis_voiajor_nearest_neighbor
-from algoritmi.comis_voiajor_backtracking_recursiv import comis_voiajor_recursive_backtracking
-from functii.utils import generate_random_distances
+from algorithms.comis_voiajor_apropiat_vecin import comis_voiajor_nearest_neighbor
+from algorithms.comis_voiajor_backtracking_recursiv import comis_voiajor_recursive_backtracking
+from functions.utils import generate_random_distances
 
 ROAD_SIZES = (30, 60, 100, 150, 200, 500)
 ALGORITHMS: dict[str, Callable] = {

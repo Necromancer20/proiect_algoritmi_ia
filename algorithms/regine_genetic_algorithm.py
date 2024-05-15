@@ -1,6 +1,6 @@
 import random
 
-from functii.utils import tournament_selection, \
+from functions.utils import tournament_selection, \
     count_attacks, generate_board
 
 POPULATION_SIZE = 50

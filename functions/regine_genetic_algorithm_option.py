@@ -1,8 +1,8 @@
 import time
 
-from algoritmi.regine_genetic_algorithm import regine_genetic_algorithm
+from algorithms.regine_genetic_algorithm import regine_genetic_algorithm
 from constants import problem_file_paths
-from functii.utils import read_board, print_board
+from functions.utils import read_board, print_board
 
 
 def show_genetic_algorithm_option() -> None:

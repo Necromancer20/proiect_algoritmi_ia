@@ -1,7 +1,7 @@
 import time
 
-from algoritmi.comis_voiajor_backtracking_recursiv import comis_voiajor_recursive_backtracking
-from functii.utils import generate_random_distances
+from algorithms.comis_voiajor_backtracking_recursiv import comis_voiajor_recursive_backtracking
+from functions.utils import generate_random_distances
 
 
 def show_tsp_recursive_backtracking_option():

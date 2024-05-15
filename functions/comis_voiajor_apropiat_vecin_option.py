@@ -1,7 +1,7 @@
 import time
 
-from algoritmi.comis_voiajor_apropiat_vecin import comis_voiajor_nearest_neighbor
-from functii.utils import generate_random_distances
+from algorithms.comis_voiajor_apropiat_vecin import comis_voiajor_nearest_neighbor
+from functions.utils import generate_random_distances
 
 
 def show_tsp_nearest_neighbor_option():
