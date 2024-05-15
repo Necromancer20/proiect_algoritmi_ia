@@ -1,8 +1,7 @@
 def regine_backtracking(board: list[list[int]]) -> list[list[int]]:
-    n = len(board)
-    r = sum(line.count(1) for line in board)
+    boardSize = len(board)
 
-    solution = solve_n_queens_problem(n, r)
+    solution = solve_n_queens_problem(boardSize, boardSize)
 
     return solution if solution else board
 

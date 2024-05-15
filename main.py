@@ -14,7 +14,7 @@ from functions import (
     regine_simulated_annealing_option,
 )
 
-
+# Mapping of menu options to their corresponding functions
 option_to_func = {
     "a": regine_backtracking_option.show_regine_backtracking_option,
     "b": regine_alpinist_option.show_regine_alpinist_option,
@@ -28,6 +28,7 @@ option_to_func = {
     "y": exit,
 }
 
+# Mapping of menu options to their corresponding display text
 menu_options = {
     "a": "Problema celor N regine (backtracking recursiv)",
     "b": "Problema celor N regine (alg. alpinistului)",
@@ -41,24 +42,36 @@ menu_options = {
     "y": "Exit",
 }
 
+# Function to display the command-line interface menu
 def cli_menu():
+    """
+    Display the command-line interface menu, allowing users to interact via the console.
+    """
     while True:
         os.system("cls")
-        print(menu_options)
-        print("Input option:\n>>>")
+        
+        # Display menu options
+        for option, text in menu_options.items():
+            print(f"{option} : {text}")
+            
+        # Prompt for user input
+        print("\nInput option:\n>>>", end=" ")
         option = input().lower()
 
         try:
+            # Execute the selected option
             option_to_func.get(option, invalid_option.show_invalid_option)()
         except Exception as e:
+            # Handle errors gracefully
             print(f"An error occurred: {e}")
 
-
+# Function to display the Tkinter GUI menu
 def tkinter_menu():
-    # The main tkinter window
+    """
+    Display the Tkinter GUI menu, allowing users to interact with buttons.
+    """
+    # Create the main tkinter window
     window = tk.Tk()
-
-    # setting the title and
     window.title("Aplicatie IA")
 
     # Calculate the required height based on the number of buttons
@@ -69,7 +82,6 @@ def tkinter_menu():
     # Set the window dimensions
     window_width = 500
     window.geometry(f"{window_width}x{window_height}")
-    window.update()    
     
     # Define a function to execute when a button is clicked
     def execute_option(option):
@@ -80,14 +92,16 @@ def tkinter_menu():
         option_button = ttk.Button(master=window, text=text, command=lambda opt=option: execute_option(opt))
         option_button.pack(side=tk.TOP, padx=10, pady=5, anchor="w", fill=tk.X)
 
-    # run the gui
+    # Run the GUI
     window.mainloop()
 
-
 def main_menu():
-    # cli_menu()
+    """
+    Display the main menu, allowing the user to choose between CLI and Tkinter interfaces.
+    """
+    # Uncomment one of the following lines based on the desired interface
+    #cli_menu()
     tkinter_menu()
-
 
 if __name__ == "__main__":
     main_menu()
