@@ -53,15 +53,15 @@ def solve_n_queens(board, col, n, num_queens):
     return False
 
 
-def solve_n_queens_problem(n, num_queens):
+def solve_n_queens_problem(size):
     """
     Function to solve N-Queens problem for any number of queens and any size of board.
     """
     # Create an empty board of size n x n
-    board = [[0 for _ in range(n)] for _ in range(n)]
+    board = [[0 for _ in range(size)] for _ in range(size)]
 
     # Solve the N-Queens problem using backtracking
-    if not solve_n_queens(board, 0, n, num_queens):
+    if not solve_n_queens(board, 0, size, size):
         return None
 
     return board

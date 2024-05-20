@@ -1,36 +1,53 @@
 import tkinter as tk
-from tkinter import ttk
-from algorithms.regine_backtracking import solve_n_queens_backtracking
+import timeit
+from algorithms.regine_backtracking import solve_n_queens_problem
+from utils.utils import draw_board_solution
 
-def handle_cli():
-    print("Executing Backtracking for N-Queens problem...")
-    size = int(input("Enter the size of the board (N): "))
-    board = [[0] * size for _ in range(size)]
-    solution, duration = solve_n_queens_backtracking(board)
+def handle_cli(size):
+    if size <= 0:
+        print("Invalid input size. Size must be a positive integer.")
+        return
+
+    print(f"Executing Backtracking for N-Queens problem with size {size}...")
+
+    # Measure the time elapsed for executing the function
+    start_time = timeit.default_timer()
+    solution = solve_n_queens_problem(size, size)
+    end_time = timeit.default_timer()
+    elapsed_time = end_time - start_time
+    
+    if solution is None:
+        return
+
+    print(f"Elapsed time: {elapsed_time:.10f} seconds")
     print(f"Solution:\n{solution}")
-    print(f"Duration: {duration:.4f} seconds")
 
-def handle_gui(window):
-    def run_algorithm():
-        size = int(size_entry.get())
-        board = [[0] * size for _ in range(size)]
-        solution, duration = solve_n_queens_backtracking(board)
-        result_text.delete("1.0", tk.END)  # Clear previous results
-        result_text.insert(tk.END, f"Solution:\n{solution}\n")
-        result_text.insert(tk.END, f"Duration: {duration:.4f} seconds")
+def handle_gui(window, size):
+    if size <= 0:
+        print("Invalid input size. Size must be a positive integer.")
+        return
 
-    # Create GUI elements
-    label = tk.Label(window, text="Enter the size of the board (N):")
-    label.pack()
+    # Measure the time elapsed for executing the function
+    start_time = timeit.default_timer()
+    solution = solve_n_queens_problem(size)
+    end_time = timeit.default_timer()
+    elapsed_time = end_time - start_time
 
-    size_entry = tk.Entry(window)
-    size_entry.pack()
+    if solution is None:
+        return
+    
+    # Clear the contents of the window
+    for widget in window.winfo_children():
+        widget.destroy()
 
-    execute_button = tk.Button(window, text="Execute", command=run_algorithm)
-    execute_button.pack()
+    # Display the elapsed time
+    time_label = tk.Label(window, text=f"Time elapsed: {elapsed_time:.8f} seconds")
+    time_label.pack()
 
-    result_text = tk.Text(window, height=10, width=50)
-    result_text.pack()
+    # Create a frame for the chessboard
+    chessboard_frame = tk.Frame(window)
+    chessboard_frame.pack()
 
-    window.mainloop()
+    # Draw the solution on the chessboard frame
+    draw_board_solution(solution, chessboard_frame)
 
