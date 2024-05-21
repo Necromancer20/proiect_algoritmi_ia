@@ -1,64 +1,71 @@
-# My Awesome Project
+# AI Algorithms
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Description
 
-My Awesome Project is a Python application that helps users manage their tasks efficiently. It provides both a Command Line Interface (CLI) and a Graphical User Interface (GUI) for a seamless user experience.
+-
 
 ## Features
 
-- **CLI and GUI**: Choose between a command-line interface or a graphical user interface based on your preference.
-- **Task Management**: Add, edit, delete, and view tasks effortlessly.
-- **Cross-Platform**: Works on Windows, macOS, and Linux operating systems.
+- Feature 1
+- Feature 2
 
-## Installation
-
-### Prerequisites
+## Prerequisites
 
 - Python 3.x
 - pip (Python package installer)
 
-### Installation Steps
+## Installation
 
-1. Clone the repository:
+### Clone the Repository
 
-   ``` bash
-   git clone https://github.com/yourusername/my-awesome-project.git
-   ```
-
-2. Navigate to the project directory:
-
-   ``` bash
-   cd my-awesome-project
-   ```
-
-
-
-===[dfjkhajkfhjkewhfkajhsdkjfhjkhk]
-
-3. Install dependencies:
-
-   ``` bash
-   pip install -r requirements.txt
-   ```
-
-## Usage
-
-### Command Line Interface (CLI)
-
-To run the CLI version of the application, execute the following command:
-
-``` bash
-python cli/main_cli.py
+```bash
+git clone https://github.com/Necromancer20/proiect_algoritmi_ia.git
 ```
 
-### Graphical User Interface (GUI)
+### Navigate to the Project Directory
 
-To run the GUI version of the application, execute the following command:
+```bash
+cd proiect_algoritmi_ia
+```
 
-``` bash
-python gui/main_gui.py
+### Set Up Virtual Environment
+
+```bash
+# On Windows
+python -m venv env
+
+# On macOS/Linux
+python3 -m venv env
+```
+
+### Activate the Virtual Environment
+
+```bash
+# On Windows
+.\env\Scripts\activate
+
+# On macOS/Linux
+source env/bin/activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Run on Windows
+
+```batch
+.\start.bat
+```
+
+### Run on Linux/macOS
+
+```bash
+./start.sh
 ```
 
 ## Contributing
@@ -78,7 +85,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgements
 
-- Thank you to all contributors who helped make this project.
+- Made by **Cerberus**:
 
   - Roman Petrica
   - Vizitiu Valentin
