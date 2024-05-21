@@ -1,9 +1,9 @@
 import os,sys
 from handlers import (
-    regine_backtracking_handler,
-    regine_alpinist_handler,
-    regine_simulated_annealing_handler,
-    regine_genetic_handler,
+    queens_backtracking_handler,
+    queens_genetic_handler,
+    queens_hill_climbing_handler,
+    queens_simulated_annealing_handler,
     tsp_backtracking_handler,
     tsp_nearest_neighbor_handler,
     show_info_handler
@@ -11,10 +11,10 @@ from handlers import (
 
 # Mapping of menu options to their corresponding functions
 option_to_func = {
-    "a": regine_backtracking_handler.handle_cli,
-    "b": regine_alpinist_handler.handle_cli,
-    "c": regine_simulated_annealing_handler.handle_cli,
-    "d": regine_genetic_handler.handle_cli,
+    "a": queens_backtracking_handler.handle_cli,
+    "b": queens_hill_climbing_handler.handle_cli,
+    "c": queens_simulated_annealing_handler.handle_cli,
+    "d": queens_genetic_handler.handle_cli,
     #"e": queen_results_plot.draw_matplotlib_graph,  # Placeholder for plot functions
     #"f": tsp_backtracking_handler.handle_cli,
     #"g": tsp_nearest_neighbor_handler.handle_cli,

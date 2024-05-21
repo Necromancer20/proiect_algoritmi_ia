@@ -1,10 +1,21 @@
 import tkinter as tk
-import random, sys
+import random, sys, timeit
 from tkinter.messagebox import showinfo
 from tkinter import ttk
 import networkx as nx
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
+
+from algorithms import (
+    queens_backtracking,
+    queens_genetic,
+    queens_hill_climbing,
+    queens_simulated_annealing,
+    tsp_backtracking,
+    tsp_nearest_neighbor,
+)
+
+import utils.constants
 
 def draw_board_solution(solution, parent_frame):
     max_board_size = 600
@@ -144,4 +155,61 @@ def draw_network(distances, optimal_path, start_node, path_found_net_frame):
     canvas.draw()
     canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 
+def export_all() -> None:
+    export_timing(queens_backtracking.solve_n_queens_backtracking, utils.constants.queen_algos_entries)
+    export_timing(queens_hill_climbing.solve_queens_hill_climbing, utils.constants.queen_algos_entries)
+    export_timing(queens_genetic.solve_queens_genetic, utils.constants.queen_algos_entries)
+    export_timing(queens_simulated_annealing.solve_queens_simulated_annealing, utils.constants.queen_algos_entries)
+    export_timing(tsp_backtracking.solve_tsp_backtracking, utils.constants.tsp_backtracking)
+    export_timing(tsp_nearest_neighbor.solve_tsp_nearest_neighbor, utils.constants.tsp_nearest_neighbor)
+
+def export_timing(handler_function, sizes):
+    results = {}
+    for size in sizes:
+        _, result = run_regine(handler_function, size)
+        results[size] = result
+    with open(f"output_data/{handler_function.__name__}_results.txt", "w") as file:
+        for size, result in results.items():
+            file.write(f"{size} : {result:.8f}\n")
+
+def run_regine(func_handler, size):
+    board = generate_random_board(size)
+
+    # Measure the time elapsed for executing the function
+    start_time = timeit.default_timer()
+    solution = func_handler(board)
+    end_time = timeit.default_timer()
+    elapsed_time = end_time - start_time
+
+    return solution, elapsed_time
+
+def run_tsp(func_handler, n_cities):
+    distances = generate_random_distances(n_cities)
+
+    start_city = random.randint(0, n_cities-1)
+
+    start_time = timeit.default_timer()
+    min_cost, optimal_path = func_handler(distances, start_city)
+    end_time = timeit.default_timer()
+    elapsed_time = end_time - start_time
+
+    return min_cost, elapsed_time
+
+import os
+
+def parse_files_in_folder(folder_path, keyword, delimiter):
+    result = {}
     
+    # Iterate over each file in the given folder
+    for root, _, files in os.walk(folder_path):
+        for file in files:
+            # Check if the file name contains the keyword
+            if keyword in file:
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r') as f:
+                    content = f.readlines()
+                    # Parse each line by the delimiter and store the result
+                    parsed_lines = [line.strip().split(delimiter) for line in content]
+                    result[file.split(".")[0]] = parsed_lines
+    
+    return result

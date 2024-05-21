@@ -1,6 +1,6 @@
 import tkinter as tk
 import timeit, random
-from algorithms.tsp_backtracking import comis_voiajor_recursive_backtracking
+from algorithms.tsp_backtracking import solve_tsp_backtracking
 from utils.utils import (
     draw_board_solution,
     generate_random_board,
@@ -20,7 +20,7 @@ def handle_cli(n_cities):
     start_city = random.randint(0, n_cities-1)
 
     start_time = timeit.default_timer()
-    min_cost, optimal_path = comis_voiajor_recursive_backtracking(distances, start_city)
+    min_cost, optimal_path = solve_tsp_backtracking(distances, start_city)
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
 
@@ -47,7 +47,7 @@ def handle_gui(window, n_cities=5):
 
     # Measure the time elapsed for executing the function
     start_time = timeit.default_timer()
-    min_cost, optimal_path = comis_voiajor_recursive_backtracking(distances, start_city)
+    min_cost, optimal_path = solve_tsp_backtracking(distances, start_city)
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
 

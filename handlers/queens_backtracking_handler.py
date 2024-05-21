@@ -1,7 +1,11 @@
 import tkinter as tk
 import timeit
-from algorithms.regine_backtracking import solve_n_queens_problem
-from utils.utils import draw_board_solution
+from algorithms.queens_backtracking import solve_n_queens_problem
+from utils.utils import (
+    draw_board_solution,
+    run_regine,
+)
+
 
 def handle_cli(size):
     if size <= 0:
@@ -10,11 +14,7 @@ def handle_cli(size):
 
     print(f"Executing Backtracking for N-Queens problem with size {size}...")
 
-    # Measure the time elapsed for executing the function
-    start_time = timeit.default_timer()
-    solution = solve_n_queens_problem(size, size)
-    end_time = timeit.default_timer()
-    elapsed_time = end_time - start_time
+    solution, elapsed_time = run_regine(solve_n_queens_problem, size)
     
     if solution is None:
         return

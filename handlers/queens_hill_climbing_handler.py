@@ -1,8 +1,9 @@
 import tkinter as tk
 import timeit
-from algorithms.regine_genetic import regine_genetic_algorithm
+from algorithms.queens_hill_climbing import solve_queens_hill_climbing
 from utils.utils import (
     draw_board_solution,
+    read_board,
     generate_random_board,
 )
 
@@ -17,7 +18,7 @@ def handle_cli(size):
 
     # Measure the time elapsed for executing the function
     start_time = timeit.default_timer()
-    solution = regine_genetic_algorithm(board)
+    solution = solve_queens_hill_climbing(board)
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
     
@@ -36,7 +37,7 @@ def handle_gui(window, size):
 
     # Measure the time elapsed for executing the function
     start_time = timeit.default_timer()
-    solution = regine_genetic_algorithm(board)
+    solution = solve_queens_hill_climbing(board)
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
 

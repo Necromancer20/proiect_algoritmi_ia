@@ -1,6 +1,6 @@
 import sys
 
-def comis_voiajor_nearest_neighbor(graph, start=0):
+def solve_tsp_nearest_neighbor(graph, start=0):
     n = len(graph)
     visited = [False] * n
     path = [start]

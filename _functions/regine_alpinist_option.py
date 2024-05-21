@@ -1,6 +1,6 @@
 import time
 
-from algorithms.regine_alpinist import solve_regine_alpinist
+from algorithms.queens_hill_climbing import solve_queens_hill_climbing
 from constants import problem_file_paths
 from functions.utils import read_board, print_board
 
@@ -10,7 +10,7 @@ def show_regine_alpinist_option() -> None:
         board = read_board(path)
 
         start_time = time.time()
-        solution = solve_regine_alpinist(board)
+        solution = solve_queens_hill_climbing(board)
         end_time = time.time()
 
         print(f"Solution found in {end_time - start_time:.2f} seconds.")

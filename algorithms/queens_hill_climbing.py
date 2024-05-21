@@ -1,5 +1,5 @@
-import copy
 
+import copy
 def count_violations(board: list[list[int]]) -> int:
     """
     Counts the number of violations (conflicts) on the board.
@@ -102,7 +102,7 @@ def hill_climbing(board: list[list[int]]) -> list[list[int]]:
     return best_board
 
 
-def solve_regine_alpinist(board: list[list[int]]) -> list[list[int]]:
+def solve_queens_hill_climbing(board: list[list[int]]) -> list[list[int]]:
     """
     Wrapper function to solve the N-Queens problem using the hill climbing algorithm.
     

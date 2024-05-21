@@ -3,18 +3,18 @@ from typing import Callable
 
 import matplotlib.pyplot as plt
 
-from algorithms.regine_alpinist import solve_regine_alpinist
-from algorithms.regine_backtracking import regine_backtracking
-from algorithms.regine_genetic_algorithm import regine_genetic_algorithm
-from algorithms.regine_simulated_annealing import regine_simulated_annealing
+from algorithms.queens_hill_climbing import solve_queens_hill_climbing
+from algorithms.queens_backtracking import regine_backtracking
+from algorithms.solve_queens_genetic import solve_queens_genetic
+from algorithms.queens_simulated_annealing import solve_queens_simulated_annealing
 from functions.utils import generate_board
 
 TABLE_SIZES = (3, 5, 10, 12, 13, 15, 20)
 ALGORITHMS: dict[str, Callable] = {
-    'Metoda Alpinistului': solve_regine_alpinist,
+    'Metoda Alpinistului': solve_queens_hill_climbing,
     'Metoda Backtracking': regine_backtracking,
-    'Metoda Alg. Genetici': regine_genetic_algorithm,
-    'Metoda Sim. Annealing': regine_simulated_annealing,
+    'Metoda Alg. Genetici': solve_queens_genetic,
+    'Metoda Sim. Annealing': solve_queens_simulated_annealing,
 }
 
 

@@ -1,6 +1,6 @@
 import sys
 
-def comis_voiajor_recursive_backtracking(graph, start=0):
+def solve_tsp_backtracking(graph, start=0):
     n = len(graph)
     visited = [False] * n
     path = [start]

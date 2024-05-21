@@ -1,6 +1,6 @@
 import tkinter as tk
 import timeit
-from algorithms.regine_simulated_annealing import regine_simulated_annealing
+from algorithms.queens_genetic import solve_queens_genetic
 from utils.utils import (
     draw_board_solution,
     generate_random_board,
@@ -17,7 +17,7 @@ def handle_cli(size):
 
     # Measure the time elapsed for executing the function
     start_time = timeit.default_timer()
-    solution = regine_simulated_annealing(board)
+    solution = solve_queens_genetic(board)
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
     
@@ -36,7 +36,7 @@ def handle_gui(window, size):
 
     # Measure the time elapsed for executing the function
     start_time = timeit.default_timer()
-    solution = regine_simulated_annealing(board)
+    solution = solve_queens_genetic(board)
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
 

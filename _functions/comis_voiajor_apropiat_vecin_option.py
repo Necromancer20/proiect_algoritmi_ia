@@ -1,6 +1,6 @@
 import time,random
 
-from algorithms.comis_voiajor_apropiat_vecin import comis_voiajor_nearest_neighbor
+from algorithms.comis_voiajor_apropiat_vecin import solve_tsp_nearest_neighbor
 from functions.utils import generate_random_distances
 
 
@@ -10,7 +10,7 @@ def show_tsp_nearest_neighbor_option():
     start_city = random.randint(0, n_cities-1)
 
     start_time = time.time()
-    min_cost, optimal_path = comis_voiajor_nearest_neighbor(distances, start_city)
+    min_cost, optimal_path = solve_tsp_nearest_neighbor(distances, start_city)
     end_time = time.time()
     print(f"Solution found in {end_time - start_time:.2f} seconds.")
 

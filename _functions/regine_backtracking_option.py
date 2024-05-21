@@ -2,7 +2,7 @@ import time
 import tkinter as tk
 from tkinter import ttk
 from constants import table_sizes
-from algorithms.regine_backtracking import regine_backtracking
+from algorithms.queens_backtracking import regine_backtracking
 from functions.utils import read_board, print_board
 
 def draw_solution(solution, window):

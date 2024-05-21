@@ -1,33 +1,39 @@
-import sys
 import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showwarning
 from handlers import (
-    regine_backtracking_handler,
-    regine_alpinist_handler,
-    regine_simulated_annealing_handler,
-    regine_genetic_handler,
+    queens_backtracking_handler,
+    queens_genetic_handler,
+    queens_hill_climbing_handler,
+    queens_simulated_annealing_handler,
     tsp_backtracking_handler,
     tsp_nearest_neighbor_handler,
 )
+from algorithms import *
 from utils.utils import (
+    export_all,
     info_gui,
-    exit
+    exit,
 )
+
+from utils.constants import *
+
 from plot import (
-    queen_results_plot
+    queen_results_plot,
+    tsp_plot
 )
 
 # Mapping of menu options to their corresponding functions
 option_to_func = {
-    "a": regine_backtracking_handler.handle_gui,
-    "b": regine_alpinist_handler.handle_gui,
-    "c": regine_simulated_annealing_handler.handle_gui,
-    "d": regine_genetic_handler.handle_gui,
+    "a": queens_backtracking_handler.handle_gui,
+    "b": queens_hill_climbing_handler.handle_gui,
+    "c": queens_simulated_annealing_handler.handle_gui,
+    "d": queens_genetic_handler.handle_gui,
     "e": queen_results_plot.draw_matplotlib_graph,
     "f": tsp_backtracking_handler.handle_gui,
     "g": tsp_nearest_neighbor_handler.handle_gui,
-    "h": None,  # Placeholder for plot functions
+    "h": tsp_plot.draw_matplotlib_graph,  # Placeholder for plot functions.
+    "i": export_all
 }
 
 # Mapping of menu options to their corresponding display text
@@ -39,14 +45,9 @@ menu_options = {
     "e": "Plotare grafice problema celor N regine",
     "f": "Problema comis-voiajorului (backtracking recursiv)",
     "g": "Problema comis-voiajorului (alg. celui mai apropiat vecin)",
-    "h": "Plotare grafice problema comis-voiajorului"
+    "h": "Plotare grafice problema comis-voiajorului",
+    "i": "Evaluate and export for every algorithm",
 }
-
-# Board sizes for the chessboard problems
-queen_algos_entries = [5, 8, 10, 15, 18, 22, 25, 30]
-tsp_backtracking = [2, 3, 5, 7, 8, 9, 10, 11]
-
-
 
 def tkinter_menu():
     def update_second_combobox(option):
@@ -57,9 +58,11 @@ def tkinter_menu():
             option: The selected option from the first combobox.
         """
         if option in ["a", "b", "c", "d"]:
-            option_combobox_2["values"] = queen_algos_entries + ["export"]
-        elif option in ["f", "g"]:
-            option_combobox_2["values"] = tsp_backtracking + ["export"]
+            option_combobox_2["values"] = queen_algos_entries
+        elif option in ["f"]:
+            option_combobox_2["values"] = tsp_backtracking
+        elif option in ["g"]:
+            option_combobox_2["values"] = tsp_nearest_neighbor
         else:
             option_combobox_2["values"] = []
 
@@ -75,21 +78,34 @@ def tkinter_menu():
                 if option in ["a", "b", "c", "d"]:
                     size_index = option_combobox_2.current()
                     if size_index != -1:
+                        size = option_combobox_2.get()
                         size = queen_algos_entries[size_index]
                         handler_function(subframe, size)
                     else:
                         showwarning("Warning", "Please select a board size.")
-                elif option in ["f", "g"]:
+                elif option in ["f"]:
                     size_index = option_combobox_2.current()
                     if size_index != -1:
+                        size = option_combobox_2.get()
                         size = tsp_backtracking[size_index]
                         handler_function(subframe, size)
                     else:
                         showwarning("Warning", "Please select a board size.")
+                elif option in ["g"]:
+                    size_index = option_combobox_2.current()
+                    if size_index != -1:
+                        size = option_combobox_2.get()
+                        size = tsp_nearest_neighbor[size_index]
+                        handler_function(subframe, size)
+                    else:
+                        showwarning("Warning", "Please select a board size.")
+                elif option in ["i"]:
+                    export_all()
                 else:
                     handler_function(subframe)
             else:
                 showwarning("Warning", "This option is not implemented yet.")
+
 
     def on_option_select(event):
         """
