@@ -13,7 +13,7 @@ def handle_cli(n_cities):
         print("Invalid input size. Size must be a positive integer.")
         return
 
-    print(f"Executing Backtracking for TS problem with size {n_cities}...")
+    print(f"Executing nearest neighbor for TS problem with size {n_cities}...")
 
     distances = generate_random_distances(n_cities)
 

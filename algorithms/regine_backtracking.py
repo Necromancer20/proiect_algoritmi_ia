@@ -1,7 +1,7 @@
 def solve_n_queens_backtracking(board: list[list[int]]) -> list[list[int]]:
     boardSize = len(board)
 
-    solution = solve_n_queens_problem(boardSize, boardSize)
+    solution = solve_n_queens_problem(boardSize)
 
     return solution if solution else board
 

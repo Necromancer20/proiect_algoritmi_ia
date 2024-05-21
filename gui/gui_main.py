@@ -24,7 +24,7 @@ option_to_func = {
     "b": regine_alpinist_handler.handle_gui,
     "c": regine_simulated_annealing_handler.handle_gui,
     "d": regine_genetic_handler.handle_gui,
-    "e": queen_results_plot.draw_matplotlib_graph,  # Placeholder for plot functions
+    "e": queen_results_plot.draw_matplotlib_graph,
     "f": tsp_backtracking_handler.handle_gui,
     "g": tsp_nearest_neighbor_handler.handle_gui,
     "h": None,  # Placeholder for plot functions
@@ -43,7 +43,8 @@ menu_options = {
 }
 
 # Board sizes for the chessboard problems
-board_sizes = [3, 5, 15, 30]
+queen_algos_entries = [5, 8, 10, 15, 18, 22, 25, 30]
+tsp_backtracking = [2, 3, 5, 7, 8, 9, 10, 11]
 
 
 
@@ -56,9 +57,9 @@ def tkinter_menu():
             option: The selected option from the first combobox.
         """
         if option in ["a", "b", "c", "d"]:
-            option_combobox_2["values"] = board_sizes + ["export"]
+            option_combobox_2["values"] = queen_algos_entries + ["export"]
         elif option in ["f", "g"]:
-            option_combobox_2["values"] = ["export"]
+            option_combobox_2["values"] = tsp_backtracking + ["export"]
         else:
             option_combobox_2["values"] = []
 
@@ -74,7 +75,14 @@ def tkinter_menu():
                 if option in ["a", "b", "c", "d"]:
                     size_index = option_combobox_2.current()
                     if size_index != -1:
-                        size = board_sizes[size_index]
+                        size = queen_algos_entries[size_index]
+                        handler_function(subframe, size)
+                    else:
+                        showwarning("Warning", "Please select a board size.")
+                elif option in ["f", "g"]:
+                    size_index = option_combobox_2.current()
+                    if size_index != -1:
+                        size = tsp_backtracking[size_index]
                         handler_function(subframe, size)
                     else:
                         showwarning("Warning", "Please select a board size.")

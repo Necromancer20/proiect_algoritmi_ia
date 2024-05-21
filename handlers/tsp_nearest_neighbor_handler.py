@@ -1,48 +1,61 @@
 import tkinter as tk
-import timeit
-from algorithms.regine_genetic import regine_genetic_algorithm
+import timeit, random
+from algorithms.tsp_nearest_neighbor import comis_voiajor_nearest_neighbor
 from utils.utils import (
     draw_board_solution,
     generate_random_board,
+    generate_random_distances,
+    draw_network,
 )
 
-def handle_cli(size):
-    if size <= 0:
+def handle_cli(n_cities):
+    if n_cities <= 0:
         print("Invalid input size. Size must be a positive integer.")
         return
 
-    print(f"Executing Backtracking for N-Queens problem with size {size}...")
+    print(f"Executing Backtracking for TS problem with size {n_cities}...")
 
-    board = generate_random_board(size)
+    distances = generate_random_distances(n_cities)
 
-    # Measure the time elapsed for executing the function
+    start_city = random.randint(0, n_cities-1)
+
     start_time = timeit.default_timer()
-    solution = regine_genetic_algorithm(board)
+    min_cost, optimal_path = comis_voiajor_nearest_neighbor(distances, start_city)
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
-    
-    if solution is None:
-        return
 
-    print(f"Elapsed time: {elapsed_time:.10f} seconds")
-    print(f"Solution:\n{solution}")
+    print(f"Solution found in {elapsed_time:.2f} seconds.")
 
-def handle_gui(window, size):
-    if size <= 0:
+    if min_cost is not None:
+        print(f"Initial distances:\n")
+        for row in distances:
+            print(' '.join(map(str, row)))
+        print(f"Minimum cost for TSP starting from city {start_city}: {min_cost}")
+        print("Optimal Path:", optimal_path)
+    else:
+        print("No solution found.")
+
+
+def handle_gui(window, n_cities=5):
+    if n_cities <= 0:
         print("Invalid input size. Size must be a positive integer.")
         return
 
-    board = generate_random_board(size)
+    distances = generate_random_distances(n_cities)
+
+    start_city = random.randint(0, n_cities-1)
 
     # Measure the time elapsed for executing the function
     start_time = timeit.default_timer()
-    solution = regine_genetic_algorithm(board)
+    min_cost, optimal_path = comis_voiajor_nearest_neighbor(distances, start_city)
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
 
-    if solution is None:
+
+    if min_cost is None:
+        print("No solution found.")
         return
-    
+
     # Clear the contents of the window
     for widget in window.winfo_children():
         widget.destroy()
@@ -52,15 +65,8 @@ def handle_gui(window, size):
     time_label.pack()
 
     # Create a frame for the chessboard
-    input_chessboard_frame = tk.Frame(window)
-    input_chessboard_frame.pack(side=tk.LEFT, padx=(10, 5), pady=5, fill=tk.X, expand=True)
+    path_found_net_frame = tk.Frame(window)
+    path_found_net_frame.pack()
 
     # Draw the solution on the chessboard frame
-    draw_board_solution(board, input_chessboard_frame)
-
-    # Create a frame for the chessboard
-    result_chessboard_frame = tk.Frame(window)
-    result_chessboard_frame.pack(side=tk.LEFT, padx=(10, 5), pady=5, fill=tk.X, expand=True)
-
-    # Draw the solution on the chessboard frame
-    draw_board_solution(solution, result_chessboard_frame)
+    draw_network(distances, optimal_path, start_city, path_found_net_frame)
