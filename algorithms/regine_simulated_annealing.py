@@ -2,7 +2,7 @@ import copy
 import random
 import math
 
-from functions.utils import count_attacks
+from utils.utils import count_attacks
 
 
 def regine_simulated_annealing(board):

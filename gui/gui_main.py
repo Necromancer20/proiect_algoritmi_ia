@@ -1,7 +1,7 @@
 import sys
 import tkinter as tk
 from tkinter import ttk
-from tkinter.messagebox import showerror, showwarning, showinfo
+from tkinter.messagebox import showwarning
 from handlers import (
     regine_backtracking_handler,
     regine_alpinist_handler,
@@ -9,7 +9,10 @@ from handlers import (
     regine_genetic_handler,
     tsp_backtracking_handler,
     tsp_nearest_neighbor_handler,
-    show_info_handler
+)
+from utils.utils import (
+    info_gui,
+    exit
 )
 
 # Mapping of menu options to their corresponding functions
@@ -39,17 +42,7 @@ menu_options = {
 # Board sizes for the chessboard problems
 board_sizes = [3, 5, 15, 30]
 
-def info_gui() -> None:
-    """
-    Displays an information message box.
-    """
-    showinfo(title='Information', message=f"Made by:\nRoman Petrica,\nVizitiu Valentin,\nCanevschii Daniel")
 
-def exit() -> None:
-    """
-    Exits the application.
-    """
-    sys.exit()
 
 def tkinter_menu():
     def update_second_combobox(option):
@@ -137,7 +130,7 @@ def tkinter_menu():
 
     # Placeholder for additional options
     subframe = tk.Frame(window)
-    subframe.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
+    subframe.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
 
     # Create a frame to hold the buttons
     button_frame = tk.Frame(window)
