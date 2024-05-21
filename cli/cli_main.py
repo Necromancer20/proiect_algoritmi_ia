@@ -1,26 +1,24 @@
 import os,sys
 from handlers import (
     regine_backtracking_handler,
-    # regine_alpinist_handler,
-    # regine_simulated_annealing_handler,
-    # regine_genetic_handler,
-    # tsp_backtracking_handler,
-    # tsp_nearest_neighbor_handler,
-    # show_info_handler
+    regine_alpinist_handler,
+    regine_simulated_annealing_handler,
+    regine_genetic_handler,
+    tsp_backtracking_handler,
+    tsp_nearest_neighbor_handler,
+    show_info_handler
 )
 
 # Mapping of menu options to their corresponding functions
 option_to_func = {
     "a": regine_backtracking_handler.handle_cli,
-    # "b": regine_alpinist_handler.handle_cli,
-    # "c": regine_simulated_annealing_handler.handle_cli,
-    # "d": regine_genetic_handler.handle_cli,
-    # "e": show_info,  # Placeholder for plot functions
-    # "f": tsp_backtracking_handler.handle_cli,
-    # "g": tsp_nearest_neighbor_handler.handle_cli,
-    # "h": show_info,  # Placeholder for plot functions
-    # "x": show_info,
-    "y": exit,
+    "b": regine_alpinist_handler.handle_cli,
+    "c": regine_simulated_annealing_handler.handle_cli,
+    "d": regine_genetic_handler.handle_cli,
+    #"e": queen_results_plot.draw_matplotlib_graph,  # Placeholder for plot functions
+    #"f": tsp_backtracking_handler.handle_cli,
+    #"g": tsp_nearest_neighbor_handler.handle_cli,
+    "h": None,  # Placeholder for plot functions
 }
 
 # Mapping of menu options to their corresponding display text

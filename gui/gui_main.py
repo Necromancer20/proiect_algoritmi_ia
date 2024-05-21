@@ -14,6 +14,9 @@ from utils.utils import (
     info_gui,
     exit
 )
+from plot import (
+    queen_results_plot
+)
 
 # Mapping of menu options to their corresponding functions
 option_to_func = {
@@ -21,7 +24,7 @@ option_to_func = {
     "b": regine_alpinist_handler.handle_gui,
     "c": regine_simulated_annealing_handler.handle_gui,
     "d": regine_genetic_handler.handle_gui,
-    "e": None,  # Placeholder for plot functions
+    "e": queen_results_plot.draw_matplotlib_graph,  # Placeholder for plot functions
     "f": tsp_backtracking_handler.handle_gui,
     "g": tsp_nearest_neighbor_handler.handle_gui,
     "h": None,  # Placeholder for plot functions

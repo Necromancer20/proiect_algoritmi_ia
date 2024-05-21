@@ -1,7 +1,10 @@
 import random
 
-from functions.utils import tournament_selection, \
-    count_attacks, generate_board
+from utils.utils import (
+    tournament_selection,
+    count_attacks,
+    generate_random_board
+)
 
 POPULATION_SIZE = 50
 MUTATION_RATE = 0.1
@@ -10,7 +13,7 @@ MAX_GENERATIONS = 100
 
 def regine_genetic_algorithm(board):
     n = len(board)
-    population = [(generate_board(n), 0) for _ in range(POPULATION_SIZE)]
+    population = [(generate_random_board(n), 0) for _ in range(POPULATION_SIZE)]
     for generation in range(MAX_GENERATIONS):
         population = [(board_state, count_attacks(board_state)) for board_state, _ in population]
         best_board_state = max(population, key=lambda x: x[1])[0]
