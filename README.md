@@ -16,19 +16,33 @@
 - Python 3.x
 - pip (Python package installer)
 
-## Installation
-
 ### Clone the Repository
 
 ```bash
 git clone https://github.com/Necromancer20/proiect_algoritmi_ia.git
 ```
 
-### Navigate to the Project Directory
-
 ```bash
 cd proiect_algoritmi_ia
 ```
+
+## Fast install && Run
+
+### On Windows
+
+```batch
+.\start.bat
+```
+
+### On Linux/macOS
+
+```bash
+./start.sh
+```
+
+## Manual Install
+
+### Navigate to the Project Directory
 
 ### Set Up Virtual Environment
 
@@ -56,17 +70,20 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-### Run on Windows
+### Run the application
+
+#### Windows
 
 ```batch
-.\start.bat
+python menu.py
 ```
 
-### Run on Linux/macOS
+#### Linux/macOS
 
 ```bash
-./start.sh
+python3 menu.py
 ```
+
 
 ## Contributing
 
