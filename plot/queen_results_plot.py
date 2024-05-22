@@ -35,7 +35,7 @@ def draw_matplotlib_graph(parent_frame):
                 continue
         
         # Plot the data with labels
-        ax.plot(data_x, data_y, label=key)
+        ax.plot(data_x, data_y, label=key.replace("solve", "").replace("results", "").replace("_", " ").strip())
 
     # Set the labels and title for the plot
     ax.set_xlabel('Board Size')
