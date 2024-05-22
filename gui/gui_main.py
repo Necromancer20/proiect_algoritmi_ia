@@ -175,8 +175,10 @@ def tkinter_menu():
     exit_button = tk.Button(button_frame, text="Exit", command=exit)
     exit_button.pack(side=tk.RIGHT, padx=(5, 10), pady=5)
 
-    state = not window.attributes('-fullscreen')
-    window.attributes('-fullscreen', state)
+    # state = not window.attributes('-fullscreen')
+    # window.attributes('-fullscreen', state)
+
+    window.state('zoomed')
 
     def focus_window():
         window.focus_force()
