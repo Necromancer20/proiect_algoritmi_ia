@@ -1,55 +1,65 @@
-import os
+import sys
+from typing import NoReturn
 
-from functii.comis_voiagor_plot_option import show_comis_voiajor_regine_plot
-from functii.comis_voiajor_apropiat_vecin_option import show_tsp_nearest_neighbor_option
-from functii.comis_voiajor_bkt_rec_option import show_tsp_recursive_backtracking_option
-from functii.info_option import show_info
-from functii.invalid_option import show_invalid_option
-from functii.n_regine_plot_option import show_n_regine_plot
-from functii.regine_aplinist_option import show_regine_aplinist_option
-from functii.regine_backtracking_option import show_regine_backtracking_option
-from functii.regine_genetic_algorithm_option import show_genetic_algorithm_option
-from functii.regine_simulated_annealing_option import show_simulated_annealing_option
+# Import menus
+from gui.gui_main import tkinter_menu
+from cli.cli_main import cli_menu
 
-main_menu_text = f"""\
-a. Problema celor N regine (backtracking recursiv)
-b. Problema celor N regine (alg. alpinistului)
-c. Problema celor N regine (alg. calirii simulate)
-d. Problema celor N regine (alg. genetic)
-e. Plotare grafice problema celor N regine
-f. Problema comis-voiajorului (backtracking recursiv)
-g. Problema comis-voiajorului (alg. celui mai apropiat vecin)
-h. Plotare grafice problema comis-voiajorului
-x. Info
-y. Exit
-
-Input option:
->>> """
-
-option_to_func = {
-    "a": show_regine_backtracking_option,
-    "b": show_regine_aplinist_option,
-    "c": show_simulated_annealing_option,
-    "d": show_genetic_algorithm_option,
-    "e": show_n_regine_plot,
-    "f": show_tsp_recursive_backtracking_option,
-    "g": show_tsp_nearest_neighbor_option,
-    "h": show_comis_voiajor_regine_plot,
-    "x": show_info,
-    "y": exit,
-}
+# Constants for user choices
+CLI_CHOICE = "1"
+GUI_CHOICE = "2"
+VALID_CHOICES = {CLI_CHOICE, GUI_CHOICE}
 
 
-def main_menu():
+def display_menu() -> str:
+    """
+    Display the main menu and get the user's choice.
+
+    Returns:
+        str: The user's choice of interface.
+    """
+    print("Choose interface:")
+    print(f"{CLI_CHOICE}. CLI")
+    print(f"{GUI_CHOICE}. GUI")
+    return input("Enter 1 or 2: ")
+
+
+def handle_choice(choice: str) -> None:
+    """
+    Handle the user's menu choice and run the appropriate interface.
+
+    Args:
+        choice (str): The user's menu choice.
+    """
+    if choice == CLI_CHOICE:
+        cli_menu()
+    elif choice == GUI_CHOICE:
+        tkinter_menu()
+    else:
+        raise ValueError("Invalid choice")
+
+
+def main() -> None:
+    """
+    Display the main menu, allowing the user to choose between CLI and Tkinter interfaces.
+    """
     while True:
-        os.system("cls")
-        print(main_menu_text, end="")
-        option = input().lower()
+        try:
+            choice = display_menu()
+            if choice in VALID_CHOICES:
+                handle_choice(choice)
+                break
+            else:
+                print("Invalid choice. Please enter 1 or 2.")
+        except ImportError as e:
+            print(f"Error importing modules: {e}")
+            sys.exit(1)
+        except ValueError as e:
+            print(e)
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+            sys.exit(1)
 
-        func = option_to_func.get(option, show_invalid_option)
-        func()
 
-
-if __name__ == '__main__':
-    # generate_board(15)
-    main_menu()
+if __name__ == "__main__":
+    main()
