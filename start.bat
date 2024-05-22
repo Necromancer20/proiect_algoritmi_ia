@@ -1,11 +1,15 @@
 @echo off
-rem Batch script to install dependencies, set up virtual environment, activate it, and run main.py
 
-rem Set up virtual environment
-echo Setting up virtual environment...
-python -m venv .env > nul 2>&1 || (
-    echo Error: Failed to set up virtual environment.
-    exit /b 1
+rem Check if .env directory exists
+if exist .env (
+    echo Virtual environment already exists. Skipping setup.
+) else (
+    rem Set up virtual environment
+    echo Setting up virtual environment...
+    python -m venv .env > nul 2>&1 || (
+        echo Error: Failed to set up virtual environment.
+        exit /b 1
+    )
 )
 
 rem Activate the virtual environment
