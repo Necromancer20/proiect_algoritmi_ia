@@ -1,11 +1,12 @@
 import tkinter as tk
-import timeit
 from algorithms.queens_hill_climbing import solve_queens_hill_climbing
 from utils.utils import (
     draw_board_solution,
-    read_board,
-    generate_random_board,
+    run_regine,
+    display_matrix_with_borders,
+    generate_random_board
 )
+
 
 def handle_cli(size):
     if size <= 0:
@@ -14,36 +15,30 @@ def handle_cli(size):
 
     print(f"Executing Backtracking for N-Queens problem with size {size}...")
 
-    board = generate_random_board(size)
+    solution, elapsed_time, init_board = run_regine(solve_queens_hill_climbing, size)
 
-    # Measure the time elapsed for executing the function
-    start_time = timeit.default_timer()
-    solution = solve_queens_hill_climbing(board)
-    end_time = timeit.default_timer()
-    elapsed_time = end_time - start_time
-    
     if solution is None:
         return
 
     print(f"Elapsed time: {elapsed_time:.10f} seconds")
-    print(f"Solution:\n{solution}")
+
+    print("\nStarting board:\n")
+    display_matrix_with_borders(init_board)
+
+    print("\nSolution board:\n")
+    display_matrix_with_borders(solution)
+
 
 def handle_gui(window, size):
     if size <= 0:
         print("Invalid input size. Size must be a positive integer.")
         return
 
-    board = generate_random_board(size)
-
-    # Measure the time elapsed for executing the function
-    start_time = timeit.default_timer()
-    solution = solve_queens_hill_climbing(board)
-    end_time = timeit.default_timer()
-    elapsed_time = end_time - start_time
+    solution, elapsed_time, init_board = run_regine(solve_queens_hill_climbing, size)
 
     if solution is None:
         return
-    
+
     # Clear the contents of the window
     for widget in window.winfo_children():
         widget.destroy()
@@ -57,7 +52,7 @@ def handle_gui(window, size):
     input_chessboard_frame.pack(side=tk.LEFT, padx=(10, 5), pady=5, fill=tk.X, expand=True)
 
     # Draw the solution on the chessboard frame
-    draw_board_solution(board, input_chessboard_frame)
+    draw_board_solution(init_board, input_chessboard_frame)
 
     # Create a frame for the chessboard
     result_chessboard_frame = tk.Frame(window)

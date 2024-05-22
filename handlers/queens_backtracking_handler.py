@@ -1,11 +1,10 @@
 import tkinter as tk
-import timeit
-from algorithms.queens_backtracking import solve_n_queens_problem
+from algorithms.queens_backtracking import solve_n_queens_backtracking
 from utils.utils import (
     draw_board_solution,
     run_regine,
+    display_matrix_with_borders
 )
-
 
 def handle_cli(size):
     if size <= 0:
@@ -14,28 +13,24 @@ def handle_cli(size):
 
     print(f"Executing Backtracking for N-Queens problem with size {size}...")
 
-    solution, elapsed_time = run_regine(solve_n_queens_problem, size)
-    
+    solution, elapsed_time, _ = run_regine(solve_n_queens_backtracking, size)
+
     if solution is None:
         return
 
     print(f"Elapsed time: {elapsed_time:.10f} seconds")
-    print(f"Solution:\n{solution}")
+    display_matrix_with_borders(solution)
 
 def handle_gui(window, size):
     if size <= 0:
         print("Invalid input size. Size must be a positive integer.")
         return
 
-    # Measure the time elapsed for executing the function
-    start_time = timeit.default_timer()
-    solution = solve_n_queens_problem(size)
-    end_time = timeit.default_timer()
-    elapsed_time = end_time - start_time
+    solution, elapsed_time, _ = run_regine(solve_n_queens_backtracking, size)
 
     if solution is None:
         return
-    
+
     # Clear the contents of the window
     for widget in window.winfo_children():
         widget.destroy()

@@ -1,8 +1,8 @@
 import tkinter as tk
-import random, sys, timeit
-from tkinter.messagebox import showinfo
 from tkinter import ttk
 import networkx as nx
+import random, sys, timeit, os
+from tkinter.messagebox import showinfo
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 
@@ -153,7 +153,7 @@ def draw_network(distances, optimal_path, start_node, path_found_net_frame):
     # Embed the plot in tkinter window
     canvas = FigureCanvasTkAgg(plt.gcf(), master=path_found_net_frame)
     canvas.draw()
-    canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+    canvas.get_tk_widget().pack(fill=ttk.BOTH, expand=True)
 
 def export_all() -> None:
     export_timing(queens_backtracking.solve_n_queens_backtracking, utils.constants.queen_algos_entries)
@@ -181,7 +181,7 @@ def run_regine(func_handler, size):
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
 
-    return solution, elapsed_time
+    return solution, elapsed_time, board
 
 def run_tsp(func_handler, n_cities):
     distances = generate_random_distances(n_cities)
@@ -193,9 +193,7 @@ def run_tsp(func_handler, n_cities):
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
 
-    return min_cost, elapsed_time
-
-import os
+    return min_cost, optimal_path, elapsed_time, distances, start_city
 
 def parse_files_in_folder(folder_path, keyword, delimiter):
     result = {}
@@ -213,3 +211,28 @@ def parse_files_in_folder(folder_path, keyword, delimiter):
                     result[file.split(".")[0]] = parsed_lines
     
     return result
+
+def display_matrix_with_borders(matrix: list[list[int]]) -> None:
+    if not matrix or not matrix[0]:
+        print("Empty matrix")
+        return
+
+    num_rows = len(matrix)
+    num_cols = len(matrix[0])
+
+    col_widths = [max(len(str(matrix[i][j])) for i in range(num_rows)) for j in range(num_cols)]
+
+    top_bottom_border = '+' + '+'.join(['-' * (col_width + 2) for col_width in col_widths]) + '+'
+    middle_border = '|' + '+'.join(['-' * (col_width + 2) for col_width in col_widths]) + '|'
+
+    print(top_bottom_border)
+
+    for i in range(num_rows):
+        row_str = '|'
+        for j in range(num_cols):
+            row_str += f" {matrix[i][j]:{col_widths[j]}} |"
+        print(row_str)
+        if i != num_rows - 1:
+            print(middle_border)
+
+    print(top_bottom_border)
