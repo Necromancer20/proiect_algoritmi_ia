@@ -66,6 +66,12 @@ def generate_random_board(n: int) -> list[list[int]]:
         col = pos % n
         board[row][col] = 1
     
+    # Step 1: Ensure one queen per column
+    board = shift_queens_horizontally(board)
+
+    # Step 2: Ensure one queen per row
+    board = shift_queens_vertically(board)
+
     return board
 
 def info_gui() -> None:
@@ -153,10 +159,10 @@ def draw_network(distances, optimal_path, start_node, path_found_net_frame):
     # Embed the plot in tkinter window
     canvas = FigureCanvasTkAgg(plt.gcf(), master=path_found_net_frame)
     canvas.draw()
-    canvas.get_tk_widget().pack(fill=ttk.BOTH, expand=True)
+    canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 
 def export_all() -> None:
-    export_timing(queens_backtracking.solve_n_queens_backtracking, utils.constants.queen_algos_entries)
+    export_timing(queens_backtracking.solve_queens_backtracking, utils.constants.queen_algos_entries)
     export_timing(queens_hill_climbing.solve_queens_hill_climbing, utils.constants.queen_algos_entries)
     export_timing(queens_genetic.solve_queens_genetic, utils.constants.queen_algos_entries)
     export_timing(queens_simulated_annealing.solve_queens_simulated_annealing, utils.constants.queen_algos_entries)
@@ -166,8 +172,8 @@ def export_all() -> None:
 def export_timing(handler_function, sizes):
     results = {}
     for size in sizes:
-        _, result = run_regine(handler_function, size)
-        results[size] = result
+        _, elapsed_time, _ = run_regine(handler_function, size)
+        results[size] = elapsed_time
     with open(f"output_data/{handler_function.__name__}_results.txt", "w") as file:
         for size, result in results.items():
             file.write(f"{size} : {result:.8f}\n")
@@ -236,3 +242,70 @@ def display_matrix_with_borders(matrix: list[list[int]]) -> None:
             print(middle_border)
 
     print(top_bottom_border)
+
+
+def shift_queens_horizontally(board):
+    n = len(board)
+    
+    for row in range(n):
+        for col in range(n):
+            if board[row][col] == 1:
+                # Check the entire column for other queens
+                conflict_found = any(board[r][col] == 1 for r in range(n) if r != row)
+                
+                if conflict_found:
+                    # Shift the current queen to the right
+                    new_col = (col + 1) % n
+                    while board[row][new_col] == 1:
+                        new_col = (new_col + 1) % n
+                    # Move the queen
+                    board[row][col] = 0
+                    board[row][new_col] = 1
+                    # After moving, re-check the new column for conflicts
+                    col = new_col  # Update col to new_col to continue checking for conflicts
+                    conflict_found = any(board[r][col] == 1 for r in range(n) if r != row)
+                    while conflict_found:
+                        # Shift to the next column
+                        new_col = (new_col + 1) % n
+                        while board[row][new_col] == 1:
+                            new_col = (new_col + 1) % n
+                        # Move the queen again
+                        board[row][col] = 0
+                        board[row][new_col] = 1
+                        col = new_col  # Update col to new_col to continue checking for conflicts
+                        conflict_found = any(board[r][col] == 1 for r in range(n) if r != row)
+
+    return board
+
+def shift_queens_vertically(board):
+    n = len(board)
+    
+    for col in range(n):
+        for row in range(n):
+            if board[row][col] == 1:
+                # Check the entire row for other queens
+                conflict_found = any(board[row][c] == 1 for c in range(n) if c != col)
+                
+                if conflict_found:
+                    # Shift the current queen downward
+                    new_row = (row + 1) % n
+                    while board[new_row][col] == 1:
+                        new_row = (new_row + 1) % n
+                    # Move the queen
+                    board[row][col] = 0
+                    board[new_row][col] = 1
+                    # After moving, re-check the new row for conflicts
+                    row = new_row  # Update row to new_row to continue checking for conflicts
+                    conflict_found = any(board[row][c] == 1 for c in range(n) if c != col)
+                    while conflict_found:
+                        # Shift to the next row
+                        new_row = (new_row + 1) % n
+                        while board[new_row][col] == 1:
+                            new_row = (new_row + 1) % n
+                        # Move the queen again
+                        board[row][col] = 0
+                        board[new_row][col] = 1
+                        row = new_row  # Update row to new_row to continue checking for conflicts
+                        conflict_found = any(board[row][c] == 1 for c in range(n) if c != col)
+
+    return board

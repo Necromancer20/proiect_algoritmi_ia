@@ -1,5 +1,5 @@
 import tkinter as tk
-from algorithms.queens_backtracking import solve_n_queens_backtracking
+from algorithms.queens_backtracking import solve_queens_backtracking
 from utils.utils import (
     draw_board_solution,
     run_regine,
@@ -13,7 +13,7 @@ def handle_cli(size):
 
     print(f"Executing Backtracking for N-Queens problem with size {size}...")
 
-    solution, elapsed_time, _ = run_regine(solve_n_queens_backtracking, size)
+    solution, elapsed_time, _ = run_regine(solve_queens_backtracking, size)
 
     if solution is None:
         return
@@ -26,7 +26,7 @@ def handle_gui(window, size):
         print("Invalid input size. Size must be a positive integer.")
         return
 
-    solution, elapsed_time, _ = run_regine(solve_n_queens_backtracking, size)
+    solution, elapsed_time, _ = run_regine(solve_queens_backtracking, size)
 
     if solution is None:
         return

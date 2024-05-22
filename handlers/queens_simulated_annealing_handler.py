@@ -2,7 +2,6 @@ import tkinter as tk
 from algorithms.queens_simulated_annealing import solve_queens_simulated_annealing
 from utils.utils import (
     draw_board_solution,
-    generate_random_board,
     run_regine,
     display_matrix_with_borders
 )
