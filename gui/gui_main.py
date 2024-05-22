@@ -137,14 +137,14 @@ def tkinter_menu():
 
     # Create the first Combobox
     selected_option_1 = tk.StringVar()
-    option_combobox_1 = ttk.Combobox(dropdown_frame, textvariable=selected_option_1, state="readonly", height=5)
+    option_combobox_1 = ttk.Combobox(dropdown_frame, textvariable=selected_option_1, state="readonly")
     option_combobox_1.pack(side=tk.LEFT, padx=(10, 5), pady=5, fill=tk.X, expand=True)
     option_combobox_1["values"] = list(menu_options.values())
     option_combobox_1.bind("<<ComboboxSelected>>", on_option_select)
 
     # Create the second Combobox
     selected_option_2 = tk.StringVar()
-    option_combobox_2 = ttk.Combobox(dropdown_frame, textvariable=selected_option_2, state="readonly", height=5)
+    option_combobox_2 = ttk.Combobox(dropdown_frame, textvariable=selected_option_2, state="readonly")
     option_combobox_2.pack(side=tk.LEFT, padx=(5, 10), pady=5, fill=tk.X, expand=True)
 
     # Create a "Run" button
